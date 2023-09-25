@@ -3,15 +3,33 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-input AutenticacaoInput {
-  email: String!
-  senha: String!
-}
-
 type AutenticacaoResponse {
+  nome: String!
+  tipoUsuario: String!
   token: String!
 }
 
+type Mutation {
+  autenticar(email: String!, senha: String!): AutenticacaoResponse!
+}
+
 type Query {
-  autenticar(data: AutenticacaoInput!): AutenticacaoResponse!
+  viaCep(data: ViaCepInput!): ViaCepResponse!
+}
+
+input ViaCepInput {
+  cep: String!
+}
+
+type ViaCepResponse {
+  bairro: String!
+  cep: String!
+  complemento: String!
+  ddd: String!
+  gia: String!
+  ibge: String!
+  localidade: String!
+  logradouro: String!
+  siafi: String!
+  uf: String!
 }

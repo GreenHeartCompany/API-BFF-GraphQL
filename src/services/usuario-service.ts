@@ -3,9 +3,11 @@ import { AutenticacaoResponse } from "../dtos/models/Usuario/autenticacao-respon
 import { AutenticacaoInput } from "../dtos/inputs/Usuario/autenticacao-input";
 import { handleError } from "../utils/err/handler-erro";
 
+const url = process.env.PATH_API_GREENHEART;
+
 const autenticarUsuario = async (data: AutenticacaoInput): Promise<AutenticacaoResponse> => {
     try {
-        const response = await axios.post("http://localhost:8080/api/usuarios/login", data);
+        const response = await axios.post(url + `/usuarios/login`, data);
         return response.data;
     } catch (e) {
         handleError(e);

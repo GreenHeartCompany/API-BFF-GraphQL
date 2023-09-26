@@ -32,11 +32,25 @@ input EnderecoInput {
 }
 
 type Mutation {
+  AtualizarVoluntario(data: VoluntarioAtualizadoInput!): BaseResponse!
   Autenticar(data: AutenticacaoInput!): AutenticacaoResponse!
+  BuscarPublicacaoPorId(id: Float!): PublicacaoModel!
   CadastrarVoluntario(data: VoluntarioInput!): BaseResponse!
 }
 
+type PublicacaoModel {
+  emailOrganizador: String!
+  fkEmpresa: String!
+  id: Float!
+  nomeOrganizador: String!
+  telOrganizador: String!
+  tipoAcao: String!
+  titulo: String!
+  totalHrTrabalho: Float!
+}
+
 type Query {
+  ListarPublicacoes: [PublicacaoModel!]!
   ListarVoluntarios: [VoluntarioModel!]!
   viaCep(data: ViaCepInput!): ViaCepResponse!
 }
@@ -62,6 +76,17 @@ type ViaCepResponse {
   logradouro: String!
   siafi: String!
   uf: String!
+}
+
+input VoluntarioAtualizadoInput {
+  cpf: String!
+  dtNasc: DateTime!
+  email: String!
+  endereco: EnderecoInput!
+  id: Float!
+  nome: String!
+  senha: String!
+  telefone: String!
 }
 
 input VoluntarioInput {

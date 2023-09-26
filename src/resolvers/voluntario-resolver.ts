@@ -8,7 +8,7 @@ import {
     AtualizarVoluntario,
     CadastrarVoluntario,
     ListarVoluntarios
-} from "../service/voluntario-service";
+} from "../services/voluntario-service";
 
 @Resolver()
 export class VoluntarioResolver {
@@ -28,5 +28,5 @@ export class VoluntarioResolver {
     async AtualizarVoluntario(@Ctx() context: TokenContext, @Arg("data") data: VoluntarioAtualizadoInput) {
         const result = await AtualizarVoluntario(context.token, data);
         return result;
-    } 
+    }
 }

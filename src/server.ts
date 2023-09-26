@@ -1,6 +1,6 @@
 import "reflect-metadata";
-import express from "express";
-require('dotenv').config()
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 import path from "node:path";
 
@@ -10,6 +10,7 @@ import { UsuarioResolver } from "./resolvers/usuario-resolver";
 import { ViaCepResolver } from "./resolvers/viacep-resolver";
 import { VoluntarioResolver } from "./resolvers/voluntario-resolver";
 import createContext from "./utils/classes/Context";
+import { PublicacaoResolver } from "./resolvers/publicacao-resolver";
 
 const PORT = 4200
 const PATH = "/green-heart/api-bff-graphql"
@@ -20,7 +21,8 @@ async function bootstrap() {
         resolvers: [
             UsuarioResolver,
             ViaCepResolver,
-            VoluntarioResolver
+            VoluntarioResolver,
+            PublicacaoResolver
         ],
         emitSchemaFile: path.resolve(__dirname, "schema.gql"),
     })

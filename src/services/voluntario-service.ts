@@ -6,9 +6,11 @@ import { handleError } from "../utils/err/handler-erro";
 import { VoluntarioModel } from "../dtos/models/Voluntario/voluntario-model";
 import { VoluntarioAtualizadoInput } from "../dtos/inputs/Voluntario/voluntario-atualizar-input";
 
+const url = process.env.PATH_API_GREENHEART;
+
 const CadastrarVoluntario = async (data: VoluntarioInput): Promise<BaseResponse> => {
     try {
-        const response = await axios.post("http://localhost:8080/api/voluntarios/cadastrar", data);
+        const response = await axios.post(url + "/voluntarios/cadastrar", data);
         const result = await ValidarResponse(response);
         return result;
     } catch (e) {
@@ -19,8 +21,8 @@ const CadastrarVoluntario = async (data: VoluntarioInput): Promise<BaseResponse>
 
 const ListarVoluntarios = async (token: string): Promise<[VoluntarioModel]> => {
     try {
-        const headers = { 'Authorization': `Bearer ${token}` };
-        const response = await axios.get("http://localhost:8080/api/voluntarios", { headers });
+        const headers = { 'Authorization': `${token}` };
+        const response = await axios.get(url + "/voluntarios", { headers });
         const result = await ValidarResponse(response.data);
         return response.data;
     } catch (e) {
@@ -30,12 +32,12 @@ const ListarVoluntarios = async (token: string): Promise<[VoluntarioModel]> => {
 }
 
 const AtualizarVoluntario = async (token: string, data: VoluntarioAtualizadoInput): Promise<BaseResponse> => {
-    try{
-        const headers = { 'Authorization': `Bearer ${token}` };
-        const response = await axios.patch("http://localhost:8080/api/voluntarios", data, { headers });
+    try {
+        const headers = { 'Authorization': `${token}` };
+        const response = await axios.patch(url + "/voluntarios", data, { headers });
         const result = await ValidarResponse(response.data);
         return response.data;
-    } catch(e) {
+    } catch (e) {
         handleError(e);
         throw new Error();
     }

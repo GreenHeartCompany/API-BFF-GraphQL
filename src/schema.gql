@@ -3,18 +3,48 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+input AutenticacaoInput {
+  email: String!
+  senha: String!
+}
+
 type AutenticacaoResponse {
   nome: String!
   tipoUsuario: String!
   token: String!
 }
 
+type BaseResponse {
+  message: String!
+  statusCode: Float!
+}
+
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
+input EnderecoInput {
+  cep: String!
+  complemento: String!
+  logradouro: String!
+  numero: String!
+}
+
 type Mutation {
-  autenticar(email: String!, senha: String!): AutenticacaoResponse!
+  Autenticar(data: AutenticacaoInput!): AutenticacaoResponse!
+  CadastrarVoluntario(data: VoluntarioInput!): BaseResponse!
 }
 
 type Query {
+  ListarVoluntarios: [VoluntarioModel!]!
   viaCep(data: ViaCepInput!): ViaCepResponse!
+}
+
+"""Os diferentes tipos de usuário para níveis de acesso da aplicação."""
+enum TipoUsuario {
+  Empresa
+  Voluntario
 }
 
 input ViaCepInput {
@@ -32,4 +62,22 @@ type ViaCepResponse {
   logradouro: String!
   siafi: String!
   uf: String!
+}
+
+input VoluntarioInput {
+  cpf: String!
+  dtNasc: DateTime!
+  email: String!
+  endereco: EnderecoInput!
+  nome: String!
+  senha: String!
+  telefone: String!
+  tipoUsuario: TipoUsuario!
+}
+
+type VoluntarioModel {
+  cpf: String!
+  email: String!
+  nome: String!
+  telefone: String!
 }

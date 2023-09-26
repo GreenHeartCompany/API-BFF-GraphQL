@@ -3,21 +3,21 @@ import { TipoUsuario } from "../../../utils/enums/tipo-usuario"
 import { EnderecoInput } from "../Endereco/endereco-input";
 
 @InputType()
-export class VoluntarioInput {
+export class VoluntarioAtualizadoInput {
     @Field()
-    nome: string;
+    id: number;
     @Field()
-    email: string;
+    nome?: string;
     @Field()
-    senha: string;
+    email?: string;
     @Field()
-    telefone: string;
+    senha?: string;
     @Field()
-    cpf: string;
+    telefone?: string;
     @Field()
-    dtNasc: Date;
-    @Field(() => TipoUsuario)
-    tipoUsuario: TipoUsuario.Voluntario;
+    cpf?: string;
+    @Field()
+    dtNasc?: Date;
     @Field(() => EnderecoInput)
-    endereco: EnderecoInput;
+    endereco?: EnderecoInput;
 }

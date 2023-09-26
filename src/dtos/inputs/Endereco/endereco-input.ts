@@ -1,6 +1,6 @@
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 
-@ObjectType()
+@InputType()
 export class EnderecoInput {
     @Field()
     logradouro: string;

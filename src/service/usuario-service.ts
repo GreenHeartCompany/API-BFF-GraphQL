@@ -3,12 +3,7 @@ import { AutenticacaoResponse } from "../dtos/models/Usuario/autenticacao-respon
 import { AutenticacaoInput } from "../dtos/inputs/Usuario/autenticacao-input";
 import { handleError } from "../utils/err/handler-erro";
 
-const autenticarUsuario = async (email: string, senha: string): Promise<AutenticacaoResponse> => {
-    const data = {
-        email: email,
-        senha: senha
-    }
-    
+const autenticarUsuario = async (data: AutenticacaoInput): Promise<AutenticacaoResponse> => {
     try {
         const response = await axios.post("http://localhost:8080/api/usuarios/login", data);
         return response.data;

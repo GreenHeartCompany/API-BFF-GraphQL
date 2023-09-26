@@ -6,8 +6,8 @@ import { autenticarUsuario } from "../service/usuario-service";
 @Resolver()
 export class UsuarioResolver {
     @Mutation(() => AutenticacaoResponse)
-    async autenticar(@Arg("email") email: string, @Arg("senha") senha: string){
-        const result = await autenticarUsuario(email, senha)
+    async Autenticar(@Arg("data") data: AutenticacaoInput){
+        const result = await autenticarUsuario(data)
         return result;
     }
 }

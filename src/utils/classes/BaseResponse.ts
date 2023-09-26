@@ -6,6 +6,4 @@ export class BaseResponse{
     statusCode: number;
     @Field()
     message: string;
-    @Field()
-    errors?: [];
 }

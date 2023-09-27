@@ -6,7 +6,7 @@ import { ViaCepInput } from "../dtos/inputs/ViaCep/viacep-input";
 @Resolver()
 export class ViaCepResolver {
     @Query(() => ViaCepResponse)
-    async viaCep(@Arg("data", {validate: false}) data: ViaCepInput) {
+    async viaCep(@Arg("data", { validate: false }) data: ViaCepInput) {
         const result = await BuscarCep(data.cep);
         return result;
     }

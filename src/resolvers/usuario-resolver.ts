@@ -6,7 +6,7 @@ import { autenticarUsuario } from "../services/usuario-service";
 @Resolver()
 export class UsuarioResolver {
     @Mutation(() => AutenticacaoResponse)
-    async Autenticar(@Arg("data") data: AutenticacaoInput) {
+    async Autenticar(@Arg("data", { validate: false }) data: AutenticacaoInput) {
         const result = await autenticarUsuario(data)
         return result;
     }

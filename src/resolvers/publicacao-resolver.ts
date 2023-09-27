@@ -12,7 +12,7 @@ export class PublicacaoResolver {
     }
 
     @Mutation(() => PublicacaoModel)
-    async BuscarPublicacaoPorId(@Ctx() context: TokenContext, @Arg("id") id: number) {
+    async BuscarPublicacaoPorId(@Ctx() context: TokenContext, @Arg("id", {validate: false}) id: number) {
         const result = await BuscarPorId(context.token, id);
         return result;
     }

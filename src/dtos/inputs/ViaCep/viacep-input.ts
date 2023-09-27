@@ -2,6 +2,6 @@ import { InputType, Field } from "type-graphql";
 
 @InputType()
 export class ViaCepInput {
-    @Field()
+    @Field(() => String, {nullable: false})
     cep: string;
 }

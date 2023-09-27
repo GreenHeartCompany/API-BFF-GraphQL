@@ -13,7 +13,7 @@ import {
 @Resolver()
 export class VoluntarioResolver {
     @Mutation(() => BaseResponse)
-    async CadastrarVoluntario(@Arg("data") data: VoluntarioInput) {
+    async CadastrarVoluntario(@Arg("data", { validate: false }) data: VoluntarioInput) {
         const result = await CadastrarVoluntario(data);
         return result;
     }
@@ -25,7 +25,7 @@ export class VoluntarioResolver {
     }
 
     @Mutation(() => BaseResponse)
-    async AtualizarVoluntario(@Ctx() context: TokenContext, @Arg("data") data: VoluntarioAtualizadoInput) {
+    async AtualizarVoluntario(@Ctx() context: TokenContext, @Arg("data", { validate: false }) data: VoluntarioAtualizadoInput) {
         const result = await AtualizarVoluntario(context.token, data);
         return result;
     }

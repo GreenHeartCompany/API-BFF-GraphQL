@@ -1,9 +1,9 @@
 import { registerEnumType } from "type-graphql";
 
 enum TipoPublicacao {
-    PLANTACAO = "Plantação",
-    LIMPEZA_AGUA = "Limpaza das águas",
-    RECICLAGEM = "Reciclagem"
+    PLANTACAO = "PLANTACAO",
+    LIMPEZA_AGUA = "LIMPEZA_AGUA",
+    RECICLAGEM = "RECICLAGEM"
 };
 
 registerEnumType(TipoPublicacao, {

@@ -24,11 +24,22 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
+type EmpresaModel {
+  cnpj: String!
+  email: String!
+  nome: String!
+  telefone: String!
+}
+
 input EnderecoInput {
   cep: String!
   complemento: String!
   logradouro: String!
   numero: String!
+}
+
+input FiltroPublicacaoInput {
+  filtro: TipoPublicacao!
 }
 
 type Mutation {
@@ -40,19 +51,27 @@ type Mutation {
 
 type PublicacaoModel {
   emailOrganizador: String!
-  fkEmpresa: String!
+  fkEmpresa: EmpresaModel!
   id: Float!
   nomeOrganizador: String!
   telOrganizador: String!
   tipoAcao: String!
   titulo: String!
-  totalHrTrabalho: Float!
+  totalHrTrabalho: String!
 }
 
 type Query {
+  FiltrarPorTipo(data: FiltroPublicacaoInput!): [PublicacaoModel!]!
   ListarPublicacoes: [PublicacaoModel!]!
   ListarVoluntarios: [VoluntarioModel!]!
   viaCep(data: ViaCepInput!): ViaCepResponse!
+}
+
+"""Os diferentes tipos conteudo das publicações."""
+enum TipoPublicacao {
+  LIMPEZA_AGUA
+  PLANTACAO
+  RECICLAGEM
 }
 
 """Os diferentes tipos de usuário para níveis de acesso da aplicação."""

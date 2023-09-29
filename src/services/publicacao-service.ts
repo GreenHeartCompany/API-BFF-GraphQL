@@ -3,6 +3,7 @@ import { handleError } from "../utils/err/handler-erro";
 import { PublicacaoModel } from "../dtos/models/Publicacao/publicacao-model";
 import { ValidarResponse } from "../utils/classes/validarResponse";
 import { TipoPublicacao } from "../utils/enums/tipo-publicacao";
+import { FiltroPublicacaoInput } from "../dtos/inputs/Publicacao/publicacao-filtro-input";
 
 const url = process.env.PATH_API_GREENHEART;
 
@@ -20,8 +21,11 @@ const BuscarPublicacoes = async (token: string): Promise<[PublicacaoModel]> => {
 
 const BuscarPorId = async (token: string, id: number): Promise<PublicacaoModel> => {
     try {
-        const headers = { Authorization: `${token}` };
-        const response = await axios.get(process.env.PATH_API_GREENHEART + `/publicacoes/${id}`, { headers });
+        const response = await axios.get(process.env.PATH_API_GREENHEART + `/publicacoes/${id}`, {
+            headers: {
+                Authorization: `${token}`
+            }
+        });
         const result = await ValidarResponse(response);
         return response.data;
     } catch (e) {
@@ -30,12 +34,15 @@ const BuscarPorId = async (token: string, id: number): Promise<PublicacaoModel> 
     }
 }
 
-const FiltrarPorTipo = async (token: string, tipo: TipoPublicacao): Promise<[PublicacaoModel]> => {
+const FiltrarPorTipo = async (token: string, data: FiltroPublicacaoInput): Promise<[PublicacaoModel]> => {
     try {
-        const headers = { Authorization: `${token}` };
-        const response = await axios.get(process.env.PATH_API_GREENHEART + `/publicacoes/filtrar/${tipo}`, { headers });
+        const response = await axios.get(process.env.PATH_API_GREENHEART + `/publicacoes/filtrar/${data.filtro}`, {
+            headers: {
+                Authorization: `${token}`
+            }
+        });
         const result = await ValidarResponse(response);
-        return response.data;
+        return result;
     } catch (e) {
         handleError(e)
         throw new Error();

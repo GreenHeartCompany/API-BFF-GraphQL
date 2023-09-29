@@ -10,7 +10,7 @@ export class PublicacaoModel {
     @Field()
     tipoAcao: string;
     @Field()
-    totalHrTrabalho: number;
+    totalHrTrabalho: string;
     @Field()
     nomeOrganizador: string;
     @Field()
@@ -18,5 +18,5 @@ export class PublicacaoModel {
     @Field()
     telOrganizador: string;
     @Field()
-    Empresa: EmpresaModel;
+    fkEmpresa: EmpresaModel;
 }

@@ -1,7 +1,9 @@
 import { Field, ObjectType } from "type-graphql";
 
 @ObjectType()
-export class TokenContext {
+export class BaseContext {
     @Field()
     token: string;
+    @Field()
+    url: string;
 };

@@ -9,7 +9,7 @@ import { buildSchema } from "type-graphql";
 import { UsuarioResolver } from "./resolvers/usuario-resolver";
 import { ViaCepResolver } from "./resolvers/viacep-resolver";
 import { VoluntarioResolver } from "./resolvers/voluntario-resolver";
-import createContext from "./utils/classes/Context";
+import createContext from "./context/Context";
 import { PublicacaoResolver } from "./resolvers/publicacao-resolver";
 
 const PORT = 4200

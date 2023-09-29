@@ -1,4 +1,5 @@
 import { Field, ObjectType } from "type-graphql";
+import { EmpresaModel } from "../Empresa/empresa-model";
 
 @ObjectType()
 export class PublicacaoModel {
@@ -17,5 +18,5 @@ export class PublicacaoModel {
     @Field()
     telOrganizador: string;
     @Field()
-    fkEmpresa: string;
+    Empresa: EmpresaModel;
 }

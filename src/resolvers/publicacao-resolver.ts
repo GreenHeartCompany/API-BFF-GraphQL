@@ -1,19 +1,26 @@
 import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
-import { TokenContext } from "../dtos/inputs/Usuario/token-context";
+import { BaseContext } from "../dtos/models/Context/context-model";
 import { PublicacaoModel } from "../dtos/models/Publicacao/publicacao-model";
-import { BuscarPorId, BuscarPublicacoes } from "../services/publicacao-service";
+import { BuscarPorId, BuscarPublicacoes, FiltrarPorTipo } from "../services/publicacao-service";
+import { TipoPublicacao } from "../utils/enums/tipo-publicacao";
 
 @Resolver()
 export class PublicacaoResolver {
     @Query(() => [PublicacaoModel])
-    async ListarPublicacoes(@Ctx() context: TokenContext): Promise<[PublicacaoModel]> {
+    async ListarPublicacoes(@Ctx() context: BaseContext): Promise<[PublicacaoModel]> {
         const result = await BuscarPublicacoes(context.token);
         return result;
     }
 
     @Mutation(() => PublicacaoModel)
-    async BuscarPublicacaoPorId(@Ctx() context: TokenContext, @Arg("id", {validate: false}) id: number) {
+    async BuscarPublicacaoPorId(@Ctx() context: BaseContext, @Arg("id", { validate: false }) id: number) {
         const result = await BuscarPorId(context.token, id);
+        return result;
+    }
+
+    @Query(() => [PublicacaoModel])
+    async FiltrarPorTipo(@Ctx() context: BaseContext, @Arg("data", { validator: false }) data: TipoPublicacao): Promise<[PublicacaoModel]> {
+        const result = await FiltrarPorTipo(context.token, data);
         return result;
     }
 }

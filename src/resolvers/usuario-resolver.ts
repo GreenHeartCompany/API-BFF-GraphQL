@@ -1,7 +1,7 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql"
 import { AutenticacaoInput } from "../dtos/inputs/Usuario/autenticacao-input";
 import { AutenticacaoResponse } from "../dtos/models/Usuario/autenticacao-response-model";
-import { autenticarUsuario } from "../services/usuario-service";
+import { autenticarUsuario } from "../services/usuario.service";
 
 @Resolver()
 export class UsuarioResolver {

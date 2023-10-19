@@ -17,7 +17,7 @@ export class VoluntarioInput {
     @Field()
     dtNasc: Date;
     @Field(() => TipoUsuario)
-    tipoUsuario: TipoUsuario.Voluntario;
+    tipoUsuario: TipoUsuario;
     @Field(() => EnderecoInput)
     endereco: EnderecoInput;
 }

@@ -7,7 +7,7 @@ export class EnderecoInput {
     @Field()
     cep: string;
     @Field()
-    numero: string;
+    numero: number;
     @Field()
     complemento: string;
 }

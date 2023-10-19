@@ -35,7 +35,7 @@ input EnderecoInput {
   cep: String!
   complemento: String!
   logradouro: String!
-  numero: String!
+  numero: Float!
 }
 
 input FiltroPublicacaoInput {

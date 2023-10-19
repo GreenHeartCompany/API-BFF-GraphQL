@@ -1,7 +1,7 @@
 import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { BaseContext } from "../dtos/models/Context/context-model";
 import { PublicacaoModel } from "../dtos/models/Publicacao/publicacao-model";
-import { BuscarPorId, BuscarPublicacoes, FiltrarPorTipo } from "../services/publicacao-service";
+import { BuscarPorId, BuscarPublicacoes, FiltrarPorTipo } from "../services/publicacao.service";
 import { FiltroPublicacaoInput } from "../dtos/inputs/Publicacao/publicacao-filtro-input";
 
 @Resolver()

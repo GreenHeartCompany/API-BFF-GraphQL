@@ -8,7 +8,7 @@ import {
     AtualizarVoluntario,
     CadastrarVoluntario,
     ListarVoluntarios
-} from "../services/voluntario-service";
+} from "../services/voluntario.service";
 
 @Resolver()
 export class VoluntarioResolver {

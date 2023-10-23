@@ -16,7 +16,7 @@ import express from 'express';
 import https from 'https';
 import fs from 'fs';
 
-const PORT = 4200;
+const PORT = 443;
 
 const app = express();
 
@@ -46,8 +46,8 @@ async function bootstrap() {
     app.use(cors(corsOptions));
 
     const options = {
-        key: fs.readFileSync('certs/chave-privada.pem'), // Caminho para sua chave privada
-        cert: fs.readFileSync('certs/certificado.pem'), // Caminho para seu certificado
+        key: fs.readFileSync('certs/chave-privada.pem'),
+        cert: fs.readFileSync('certs/certificado.pem'),
     };
 
     const httpsServer = https.createServer(options, app);

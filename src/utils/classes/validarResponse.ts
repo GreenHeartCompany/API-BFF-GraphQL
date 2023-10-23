@@ -13,6 +13,7 @@ export const ValidarResponse = async (res: any): Promise<any> => {
     } else if (res.status === 201) {
         const response = new BaseResponse();
         response.statusCode = res.data?.status || res.status;
-        response.message = res.data?.message || res.message;
+        response.message = res.data?.message || res.statusText;
+        return response
     }
 }

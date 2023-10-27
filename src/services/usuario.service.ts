@@ -4,6 +4,7 @@ import { AutenticacaoInput } from "../dtos/inputs/Usuario/autenticacao-input";
 import { handleError } from "../utils/err/handler-erro";
 import { validate } from "class-validator";
 import { ValidarResponse } from "../utils/classes/validarResponse";
+import { ValidacaoEmailInput } from "../dtos/inputs/Usuario/validacao-email-input";
 
 const url = process.env.PATH_API_GREENHEART;
 
@@ -18,4 +19,18 @@ const autenticarUsuario = async (data: AutenticacaoInput): Promise<AutenticacaoR
     }
 };
 
-export { autenticarUsuario };
+const emailExiste = async (data: ValidacaoEmailInput): Promise<Boolean> => {
+    try {
+        const response = await axios.get(url + `/usuarios/verificar-email/${data.email}`);
+        const result = await ValidarResponse(response)
+        return result;
+    } catch (e) {
+        handleError(e);
+        throw new Error();
+    }
+};
+
+export { 
+    autenticarUsuario, 
+    emailExiste
+};

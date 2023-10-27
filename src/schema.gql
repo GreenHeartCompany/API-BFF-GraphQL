@@ -64,6 +64,7 @@ type Query {
   FiltrarPorTipo(data: FiltroPublicacaoInput!): [PublicacaoModel!]!
   ListarPublicacoes: [PublicacaoModel!]!
   ListarVoluntarios: [VoluntarioModel!]!
+  ValidarEmail(data: ValidacaoEmailInput!): Boolean!
   viaCep(data: ViaCepInput!): ViaCepResponse!
 }
 
@@ -78,6 +79,10 @@ enum TipoPublicacao {
 enum TipoUsuario {
   Empresa
   Voluntario
+}
+
+input ValidacaoEmailInput {
+  email: String!
 }
 
 input ViaCepInput {

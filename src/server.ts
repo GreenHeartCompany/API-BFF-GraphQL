@@ -1,62 +1,55 @@
 import "reflect-metadata";
 import * as dotenv from 'dotenv';
-dotenv.config();
-
-import path from "node:path";
-
-import { ApolloServer } from "apollo-server";
-import { buildSchema } from "type-graphql";
-import { UsuarioResolver } from "./resolvers/usuario-resolver";
-import { ViaCepResolver } from "./resolvers/viacep-resolver";
-import { VoluntarioResolver } from "./resolvers/voluntario-resolver";
-import createContext from "./context/Context";
-import { PublicacaoResolver } from "./resolvers/publicacao-resolver";
 import cors from 'cors';
 import express from 'express';
 import https from 'https';
 import fs from 'fs';
+import path from 'path';
+import { ApolloServer } from 'apollo-server-express';
 
-const PORT = 443;
+dotenv.config();
 
+import { buildSchema } from 'type-graphql';
+import { UsuarioResolver } from './resolvers/usuario-resolver';
+import createContext from './context/Context';
+import { PublicacaoResolver } from './resolvers/publicacao-resolver';
+
+const PORT = 4200;
 const app = express();
 
 const corsOptions = {
-    origin: '*',
-    credentials: true,
+  origin: '*',
+  credentials: true,
 };
 
-
 async function bootstrap() {
-    
-    const schema = await buildSchema({
-        resolvers: [
-            UsuarioResolver,
-            ViaCepResolver,
-            VoluntarioResolver,
-            PublicacaoResolver
-        ],
-        emitSchemaFile: path.resolve(__dirname, "schema.gql"),
-    });
+  const schema = await buildSchema({
+    resolvers: [UsuarioResolver, PublicacaoResolver],
+    emitSchemaFile: path.resolve(__dirname, 'schema.gql'),
+  });
 
-    const server = new ApolloServer({
-        schema,
-        context: createContext
-    });
+  const apolloServer = new ApolloServer({
+    schema,
+    context: createContext,
+  });
 
-    app.use(cors(corsOptions));
+  await apolloServer.start();
 
-    const options = {
-        key: fs.readFileSync('certs/chave-privada.pem'),
-        cert: fs.readFileSync('certs/certificado.pem'),
-    };
+  app.use(cors(corsOptions));
 
-    const httpsServer = https.createServer(options, app);
+  apolloServer.applyMiddleware({ app, path: '/' });
 
-    const { url } = await server.listen({ server: httpsServer });
+  const httpsServer = https.createServer(
+    {
+      key: fs.readFileSync('C:\\Users\\Mariana Nascimento\\Downloads\\API-BFF-GraphQL\\src\\certs\\private-key.key', 'utf8'),
+      cert: fs.readFileSync('C:\\Users\\Mariana Nascimento\\Downloads\\API-BFF-GraphQL\\src\\certs\\certificate.crt', 'utf8'),
+    },
+    app
+  );
 
-    console.log({
-        message: `🚀 HTTP Server ready and running in ${url}`,
-    });
+  httpsServer.listen(PORT, () => {
+    console.log(`🚀 HTTPS Server ready and running on port ${PORT}`);
+  });
 }
 
 bootstrap();

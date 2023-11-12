@@ -9,10 +9,12 @@ import { ApolloServer } from 'apollo-server-express';
 
 dotenv.config();
 
-import { buildSchema } from 'type-graphql';
-import { UsuarioResolver } from './resolvers/usuario-resolver';
-import createContext from './context/Context';
-import { PublicacaoResolver } from './resolvers/publicacao-resolver';
+import { buildSchema } from "type-graphql";
+import { UsuarioResolver } from "./resolvers/usuario-resolver";
+import { ViaCepResolver } from "./resolvers/viacep-resolver";
+import { VoluntarioResolver } from "./resolvers/voluntario-resolver";
+import { PublicacaoResolver } from "./resolvers/publicacao-resolver";
+import createContext from "./context/Context";
 
 const PORT = 4200;
 const app = express();
@@ -24,7 +26,7 @@ const corsOptions = {
 
 async function bootstrap() {
   const schema = await buildSchema({
-    resolvers: [UsuarioResolver, PublicacaoResolver],
+    resolvers: [UsuarioResolver, PublicacaoResolver, ViaCepResolver, VoluntarioResolver],
     emitSchemaFile: path.resolve(__dirname, 'schema.gql'),
   });
 
@@ -41,8 +43,8 @@ async function bootstrap() {
 
   const httpsServer = https.createServer(
     {
-      key: fs.readFileSync('C:\\Users\\Mariana Nascimento\\Downloads\\API-BFF-GraphQL\\src\\certs\\private-key.key', 'utf8'),
-      cert: fs.readFileSync('C:\\Users\\Mariana Nascimento\\Downloads\\API-BFF-GraphQL\\src\\certs\\certificate.crt', 'utf8'),
+      key: fs.readFileSync('./src/certs/private-key.key', 'utf8'),
+      cert: fs.readFileSync('./src/certs/certificate.crt', 'utf8'),
     },
     app
   );

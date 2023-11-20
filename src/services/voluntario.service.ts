@@ -1,4 +1,5 @@
 import axios from "axios";
+import https from "https";
 import { VoluntarioInput } from "../dtos/inputs/Voluntario/voluntario-input";
 import { BaseResponse } from "../utils/classes/BaseResponse";
 import { ValidarResponse } from "../utils/classes/validarResponse";
@@ -10,7 +11,7 @@ const url = process.env.PATH_API_GREENHEART;
 
 const CadastrarVoluntario = async (data: VoluntarioInput): Promise<BaseResponse> => {
     try {
-        const response = await axios.post(url + "/voluntarios/cadastrar", data);
+        const response = await axios.post(url + "/voluntarios/cadastrar", data, { httpsAgent: new https.Agent({ rejectUnauthorized: false }) });
         const result = await ValidarResponse(response);
         return result;
     } catch (e) {
@@ -22,7 +23,7 @@ const CadastrarVoluntario = async (data: VoluntarioInput): Promise<BaseResponse>
 const ListarVoluntarios = async (token: string): Promise<[VoluntarioModel]> => {
     try {
         const headers = { 'Authorization': `${token}` };
-        const response = await axios.get(url + "/voluntarios", { headers });
+        const response = await axios.get(url + "/voluntarios", { headers, httpsAgent: new https.Agent({ rejectUnauthorized: false }) });
         const result = await ValidarResponse(response.data);
         return response.data;
     } catch (e) {
@@ -34,7 +35,7 @@ const ListarVoluntarios = async (token: string): Promise<[VoluntarioModel]> => {
 const AtualizarVoluntario = async (token: string, data: VoluntarioAtualizadoInput): Promise<BaseResponse> => {
     try {
         const headers = { 'Authorization': `${token}` };
-        const response = await axios.patch(url + "/voluntarios", data, { headers });
+        const response = await axios.patch(url + "/voluntarios", data, { headers, httpsAgent: new https.Agent({ rejectUnauthorized: false }) });
         const result = await ValidarResponse(response.data);
         return response.data;
     } catch (e) {

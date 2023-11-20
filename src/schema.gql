@@ -14,6 +14,16 @@ type AutenticacaoResponse {
   token: String!
 }
 
+type BaseResponse {
+  message: String!
+  statusCode: Float!
+}
+
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
 type EmpresaModel {
   cnpj: String!
   email: String!
@@ -21,13 +31,22 @@ type EmpresaModel {
   telefone: String!
 }
 
+input EnderecoInput {
+  cep: String!
+  complemento: String!
+  logradouro: String!
+  numero: Float!
+}
+
 input FiltroPublicacaoInput {
   filtro: TipoPublicacao!
 }
 
 type Mutation {
+  AtualizarVoluntario(data: VoluntarioAtualizadoInput!): BaseResponse!
   Autenticar(data: AutenticacaoInput!): AutenticacaoResponse!
   BuscarPublicacaoPorId(id: Float!): PublicacaoModel!
+  CadastrarVoluntario(data: VoluntarioInput!): BaseResponse!
 }
 
 type PublicacaoModel {
@@ -44,6 +63,8 @@ type PublicacaoModel {
 type Query {
   FiltrarPorTipo(data: FiltroPublicacaoInput!): [PublicacaoModel!]!
   ListarPublicacoes: [PublicacaoModel!]!
+  ListarVoluntarios: [VoluntarioModel!]!
+  viaCep(data: ViaCepInput!): ViaCepResponse!
 }
 
 """Os diferentes tipos conteudo das publicações."""
@@ -51,4 +72,56 @@ enum TipoPublicacao {
   LIMPEZA_AGUA
   PLANTACAO
   RECICLAGEM
+}
+
+"""Os diferentes tipos de usuário para níveis de acesso da aplicação."""
+enum TipoUsuario {
+  Empresa
+  Voluntario
+}
+
+input ViaCepInput {
+  cep: String!
+}
+
+type ViaCepResponse {
+  bairro: String!
+  cep: String!
+  complemento: String!
+  ddd: String!
+  gia: String!
+  ibge: String!
+  localidade: String!
+  logradouro: String!
+  siafi: String!
+  uf: String!
+}
+
+input VoluntarioAtualizadoInput {
+  cpf: String!
+  dtNasc: DateTime!
+  email: String!
+  endereco: EnderecoInput!
+  id: Float!
+  nome: String!
+  senha: String!
+  telefone: String!
+}
+
+input VoluntarioInput {
+  cpf: String!
+  dtNasc: DateTime!
+  email: String!
+  endereco: EnderecoInput!
+  nome: String!
+  senha: String!
+  telefone: String!
+  tipoUsuario: TipoUsuario!
+}
+
+type VoluntarioModel {
+  cpf: String!
+  email: String!
+  nome: String!
+  telefone: String!
 }

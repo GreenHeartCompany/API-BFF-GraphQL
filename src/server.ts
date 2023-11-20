@@ -43,12 +43,12 @@ async function bootstrap() {
 
   const httpsServer = https.createServer(
     {
-      key: fs.readFileSync('./src/certs/private-key.key', 'utf8'),
-      cert: fs.readFileSync('./src/certs/certificate.crt', 'utf8'),
+      key: fs.readFileSync('./src/certs/privkey1.pem', 'utf8'),
+      cert: fs.readFileSync('./src/certs/fullchain1.pem', 'utf8'),
     },
     app
   );
-
+	
   httpsServer.listen(PORT, () => {
     console.log(`🚀 HTTPS Server ready and running on port ${PORT}`);
   });

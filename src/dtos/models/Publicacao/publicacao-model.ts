@@ -8,6 +8,8 @@ export class PublicacaoModel {
     @Field()
     titulo: string;
     @Field()
+    descricao: string;
+    @Field()
     tipoAcao: string;
     @Field()
     totalHrTrabalho: string;
@@ -18,5 +20,5 @@ export class PublicacaoModel {
     @Field()
     telOrganizador: string;
     @Field()
-    fkEmpresa: EmpresaModel;
+    empresa: EmpresaModel;
 }

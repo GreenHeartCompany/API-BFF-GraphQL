@@ -27,6 +27,7 @@ scalar DateTime
 type EmpresaModel {
   cnpj: String!
   email: String!
+  idUsuario: Float!
   nome: String!
   telefone: String!
 }
@@ -50,8 +51,9 @@ type Mutation {
 }
 
 type PublicacaoModel {
+  descricao: String!
   emailOrganizador: String!
-  fkEmpresa: EmpresaModel!
+  empresa: EmpresaModel!
   id: Float!
   nomeOrganizador: String!
   telOrganizador: String!
